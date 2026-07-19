@@ -1,0 +1,19 @@
+# MagicVisual — Render config
+# Docs: https://render.com/docs/blueprint-spec
+# Deply en: https://dashboard.render.com/select-repo?type=web
+
+services:
+  - type: web
+    name: magicvisual
+    runtime: docker
+    plan: free  # cambialo a "starter" ($7/mo) para 24/7 sin sleep
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: RATE_LIMIT_MAX
+        value: "0"  # 0 = ilimitado
+      # ZAI_API_KEY se configura manualmente en el dashboard de Render
+      # o usando un "secret file" / "env group"
